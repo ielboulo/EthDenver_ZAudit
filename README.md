@@ -29,3 +29,8 @@ Our solution centralizes the audit reports and make them easy readable)
 ## Business Perspective : 
 - The tools eases access of auditors to a tool that processes the audit reports and extracts meaningful data
 - The gathered data by time ( smart contracts code in solidity / Rust / Cairo + corresponding Vulnerabilities) will serve as a training data for a Machine Learning Model that will allow to detect automatically a vulnerability
+
+## Technical Stack 
+
+## Access SEISA here 
+Vercel link to the UI ? 
