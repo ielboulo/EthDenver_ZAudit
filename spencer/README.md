@@ -23,3 +23,7 @@
 - https://ethdenver2024.devfolio.co/prizes?partner=RISC+Zero
 - https://ethdenver2024.devfolio.co/prizes?partner=Harpie
 - https://ethdenver2024.devfolio.co/prizes?partner=Filecoin+Foundation
+
+
+## side notes
+- i started working on some utility classes in python but I can later convert it to Rust code if we decide on using a Rust codebase.
