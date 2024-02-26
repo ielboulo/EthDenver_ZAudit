@@ -1,4 +1,4 @@
-# EthDenver_SEISA
+# EthDenver_SEISA : ZK & AI at the service of security !
 
 SEISA is a platform for provable audit on-chain; allowing end-users to get access to the security health of a web3 project (DeFi protocol, DAO smart contracts, ... etc) via an online dashboard.
 The solution uses ZK technology and is empowered by AI. 
