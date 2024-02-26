@@ -34,3 +34,10 @@ Our solution centralizes the audit reports and make them easy readable)
 
 ## Access SEISA here 
 Vercel link to the UI ? 
+
+## Annex / Ideas / Pele-mele :
+
+https://skynet.certik.com/projects/aave ===> the link is specific to CErtik audits, but our solution is more global , more inclusive and centralizing all types of audits. 
+We should mention that one project can be audited by many auditors : Certick, hacken, nethermind, solo experts, .. etc 
+
+so it's at this stage that resides also our innovation !
