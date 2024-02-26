@@ -10,13 +10,13 @@ Our solution centralizes the audit reports and make them easy readable)
 - if the user can't understand some vulnerability, it can get help from the AI chatbot integrated with our platform.
 
 ### The solution uses Zero Knowledge to :
-1- Bring the proof of validity of a vulnerability (ie. : I prefer to let you Eman elaborate this for more relevancy)
-2- Access the auditor's ratings while preseraving their privacy  (ie. : the users can access the rating given by auidtors without revealing the auditor's identity) 
+- Bring the proof of validity of a vulnerability (ie. : I prefer to let you Eman elaborate this for more relevancy)
+- Access the auditor's ratings while preseraving their privacy  (ie. : the users can access the rating given by auidtors without revealing the auditor's identity) 
 
 ### The solution uses AI in order to :
-1- sxtract data from the audit reports (pdf, forms, .. etc)
-2- Give statstics about the detected vulnerabilities (from minor to critical ones) ==> the form can be a detailed list + summary + (graphics with repartition of vulnerabilites degree ?) 
-3- Access to an AI chatbot in order allow to end user to have access to specific exaplanations if needed (for example : what's a re-entrancy attack ? )
+- Extract data from the audit reports (pdf, forms, .. etc)
+- Give statstics about the detected vulnerabilities (from minor to critical ones) ==> the form can be a detailed list + summary + (graphics with repartition of vulnerabilites degree ?) 
+- Access to an AI chatbot in order allow to end user to have access to specific exaplanations if needed (for example : what's a re-entrancy attack ? )
 
 Question: what happen if a vulnerability is solved by the project ? does the audit report evolve in time ? ...
 
