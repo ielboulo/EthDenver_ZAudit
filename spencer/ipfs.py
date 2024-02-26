@@ -43,7 +43,6 @@ class PinataIPFSStorage:
         if 'IpfsHash' in upload_result:
             return self.get_file_url(upload_result['IpfsHash'])
         else:
-            # Implement error handling based on your requirements
             raise Exception("Failed to upload file to IPFS.")
         
 
