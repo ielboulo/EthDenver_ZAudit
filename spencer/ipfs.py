@@ -30,7 +30,7 @@ class PinataIPFSStorage:
             if response.status_code == 200:
                 return response.json()
             else:
-                # Implement better error handling based on your requirements
+                # TODO: add better error handling
                 response.raise_for_status()
 
     def get_file_url(self, hash):
