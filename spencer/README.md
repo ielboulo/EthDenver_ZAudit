@@ -17,3 +17,9 @@
 - [ETHDenver 2024 Hackathon](https://ethdenver2024.devfolio.co/)
 - [Debate on New Standard for On-Chain Audit Reports](https://thedefiant.io/ethereum-developers-debate-new-standard-for-on-chain-audit-reports)
 - [AI-Based Code Audits Article](https://www.coindesk.com/tech/2024/02/22/vitalik-buterin-floats-idea-of-ai-based-code-audits-ethereum-project-developers-back-him-up/)
+
+## potential bounties
+- https://ethdenver2024.devfolio.co/prizes?partner=ETHStorage
+- https://ethdenver2024.devfolio.co/prizes?partner=RISC+Zero
+- https://ethdenver2024.devfolio.co/prizes?partner=Harpie
+- https://ethdenver2024.devfolio.co/prizes?partner=Filecoin+Foundation
