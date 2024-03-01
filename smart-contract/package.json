@@ -55,8 +55,6 @@
     }
   },
   "dependencies": {
-    "@nomicfoundation/hardhat-ethers": "^3.0.2",
-    "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
-    "@nomicfoundation/hardhat-toolbox": "^4.0.0"
+    "@nomicfoundation/hardhat-ethers": "^3.0.2"
   }
 }
