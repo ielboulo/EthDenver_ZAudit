@@ -1,0 +1,15 @@
+{
+  "name": "ethdenver_zaudit",
+  "version": "1.0.0",
+  "description": "SEISA is a platform for provable audit on-chain; allowing end-users to get access to the security health of a web3 project (DeFi protocol, DAO smart contracts, ... etc) via an online dashboard. The solution uses ZK technology and is empowered by AI.  Our solution centralizes the audit reports and make them easy readable)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.20.1"
+  }
+}
