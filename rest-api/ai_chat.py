@@ -1,9 +1,9 @@
 import openai
-
+import json
 
 class BlockchainAuditAssistant:
-    def __init__(self, openai_api_key):
-        self.client = openai.Client(api_key=openai_api_key)
+    def __init__(self, key):
+        self.client = openai.Client(api_key=key)
         self.assistant_id = None
         self.thread_id = None
 
@@ -15,12 +15,16 @@ class BlockchainAuditAssistant:
             tools=[{"type": "code_interpreter"}, {"type": "retrieval"}],  # Assuming retrieval could be useful for fetching relevant data or examples
             model="gpt-4-turbo-preview"  # Specify the model appropriate for the task
         )
-        self.assistant_id = self.assistant['id']
+        assistant_object = json.loads(self.assistant.model_dump_json())
+        assistant_id = dict(assistant_object).get("id")
+        self.assistant_id = assistant_id
 
     def start_conversation(self):
         """Start a new conversation thread."""
         thread = self.client.beta.threads.create()
-        self.thread_id = thread['id']
+        thread_object = json.loads(thread.model_dump_json())
+        thread_id = dict(thread_object).get("id")
+        self.thread_id = thread_id
 
     def send_message(self, message_content):
         """Send a message to the thread."""
@@ -36,8 +40,20 @@ class BlockchainAuditAssistant:
         """Retrieve messages from the assistant in the current thread."""
         if self.thread_id is None:
             raise ValueError("Conversation not started. Call start_conversation() first.")
-        messages = self.client.beta.threads.messages.list(thread_id=self.thread_id)
-        return [message for message in messages['data'] if message['role'] == 'assistant']
+        messages_page = self.client.beta.threads.messages.list(thread_id=self.thread_id)
+        
+        messages = []
+        print (messages_page.content)
+        for message in list(messages_page):
+            # Assuming message is an object with attributes you can access
+            if message.role == 'assistant':
+                # Adjust how you access message content based on its actual structure
+                print (message.content)
+                messages.append(message.content)
+
+        return messages
+
+
 
     def run_assistant(self, instructions=None):
         """Run the assistant to process the thread and generate a response."""

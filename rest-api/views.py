@@ -3,12 +3,12 @@ from werkzeug.utils import secure_filename
 import os
 
 from utils import PinataIPFSStorage
-from openai import BlockchainAuditAssistant
+from ai_chat import BlockchainAuditAssistant
 
 # Initialize your IPFS class and the AI assistant outside of the route to avoid reinitialization
 ipfs_storage = PinataIPFSStorage()
-openai_api_ky = os.environ["OPENAI_API_KEY"]
-blockchain_audit_assistant = BlockchainAuditAssistant(openai_api_key="your_openai_api_key_here")
+openai_api_key = os.environ["OPENAI_API_KEY"]
+blockchain_audit_assistant = BlockchainAuditAssistant(key=openai_api_key)
 
 # Assuming you've already implemented the PinataIPFSStorage class and openai_hello_world function
 
@@ -29,24 +29,33 @@ def configure_routes(app):
         
         question = content['question']
         
-        # Initialize and set up the assistant if not already done
         if not blockchain_audit_assistant.assistant_id:
             blockchain_audit_assistant.create_assistant()
             blockchain_audit_assistant.start_conversation()
         
-        # Send the question to the assistant
         blockchain_audit_assistant.send_message(question)
-        
-        # Run the assistant to get the answer
         blockchain_audit_assistant.run_assistant()
-        
-        # Retrieve the response
         responses = blockchain_audit_assistant.get_responses()
+        
         if responses:
-            last_response = responses[-1]  # Get the latest response
-            return jsonify({'answer': last_response['content']['text']['value']})
+            # Assuming responses[-1] is directly the content or you adjust it in get_responses
+            last_response = responses[-1]
+            # Now, you need to extract the text from last_response correctly
+            
+            # Example, if last_response is a dictionary with a structure like { 'text': 'response text here' }
+            # answer_text = last_response['text']
+            
+            # If last_response is already the text
+            answer_text = last_response  # If last_response itself contains the text
+            
+            return jsonify({'answer': answer_text})
         else:
             return jsonify({'error': 'Failed to get an answer from the assistant'}), 500
+
+
+
+
+
 
 # Don't forget to call configure_routes with your Flask app
 configure_routes(app)
