@@ -1,14 +1,14 @@
-node_modules
-.env
+/smart-contracts/node_modules
+/smart-contracts/.env
 
 # Hardhat files
-/cache
+/smart-contracts/cache
 /artifacts
 
 # TypeChain files
-/typechain
-/typechain-types
+/smart-contracts/typechain
+/smart-contracts/typechain-types
 
 # solidity-coverage files
-/coverage
-/coverage.json
+/smart-contracts/coverage
+//coverage.json
