@@ -46,6 +46,26 @@ zircuit: {
       accounts: [privateKey || ''],
       saveDeployments: true,
     },
+    hedra_test: {
+      url: 'https://testnet.hashio.io/api',
+      accounts: [privateKey || ''],
+      saveDeployments: true,
+    },
+    oasis_test: {
+      url: 'https://testnet.sapphire.oasis.dev',
+      accounts: [privateKey || ''],
+      saveDeployments: true,
+    },
+    injective_test: {
+      url: 'https://testnet.sentry.tm.injective.network:443',
+      accounts: [privateKey || ''],
+      saveDeployments: true,
+    },
+    xdc_test: {
+      url: 'https://rpc.apothem.network',
+      accounts: [privateKey || ''],
+      saveDeployments: true,
+    },
     mumbai: {
       url: 'https://polygon-mumbai.g.alchemy.com/v2/tCbwTAqlofFnmbVORepuHNcsrjNXWdRJ',
       accounts: [privateKey || ''],
