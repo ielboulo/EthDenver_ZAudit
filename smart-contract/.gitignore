@@ -1,9 +1,5 @@
 */node_modules
 .env
-privateKey.secret
-alchemyKey.secret
-
-
 
 # Hardhat files
 /cache

@@ -1,7 +1,5 @@
 */node_modules
 smart-contracts/.env
-smart-contracts/privateKey.secret
-smart-contracts/alchemyKey.secret
 
 # Hardhat files
 smart-contracts/cache

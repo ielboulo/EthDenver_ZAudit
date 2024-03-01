@@ -46,8 +46,6 @@ class PinataIPFSStorage:
             raise Exception("Failed to upload file to IPFS.")
         
 
-def openai_hello_world():
-    return "Hello World"
 
 # Example usage
 # Ensure you set PINATA_API_TOKEN as an environment variable

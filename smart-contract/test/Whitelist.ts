@@ -16,7 +16,7 @@ import {
       const [owner, addr1, addr2, otherAccount] = await ethers.getSigners();
   
       const Whitelist = await ethers.getContractFactory("Whitelist");
-      const whitelist = await Whitelist.deploy(owner.address);
+      const whitelist = await Whitelist.deploy();
   
       return { whitelist, owner, addr1, addr2, otherAccount };
     }
