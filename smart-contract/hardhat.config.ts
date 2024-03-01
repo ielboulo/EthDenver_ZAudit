@@ -7,6 +7,7 @@ import "hardhat-gas-reporter";
 import "./tasks/accounts";
 import "@nomiclabs/hardhat-etherscan";
 import 'dotenv/config'
+import "@nomicfoundation/hardhat-foundry";
 
  const privateKey = process.env.PRIVATE_KEY;
 
