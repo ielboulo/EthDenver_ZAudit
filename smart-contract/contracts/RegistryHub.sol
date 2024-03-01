@@ -38,8 +38,8 @@ contract RegistryHub {
         
     }
 
-    function getFunctionReports(address _smartContract) external view returns (FunctionReport[] memory) {
-        return functionReports[_smartContract];
-    }
+    // function getFunctionReports(address _smartContract) external view returns (FunctionReport[] memory) {
+    //     return functionReports[_smartContract];
+    // }
 }
 

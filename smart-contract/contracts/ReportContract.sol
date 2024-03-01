@@ -56,7 +56,7 @@ storageURI : the metadata of the details of a function
             string memory _gitHubCommitHash,
             string memory _summary
         ) external onlyWhitelisted {
-            FunctionReport memory newReport = FunctionReport({
+            IssueReport memory newReport = IssueReport({
                 tag: _tag,
                 auditorName: _auditorName,
                 storageURI: _storageURI,
@@ -66,17 +66,17 @@ storageURI : the metadata of the details of a function
                 submittedBy: msg.sender
             });
 
-            functionReports[_smartContract][_functionSelector].push(newReport);
+            issueReports[_smartContract][_functionSelector].push(newReport);
             functionNames[_smartContract][_functionSelector] = _functionName;
             emit FunctionReportAdded(_smartContract, _functionSelector, _tag);
         }
 
-    function getFunctionReports(address _smartContract, bytes4 _functionSelector) external view returns (FunctionReport[] memory) {
-        return functionReports[_smartContract][_functionSelector];
+    function getFunctionReports(address _smartContract, bytes4 _functionSelector) external view returns (IssueReport[] memory) {
+        return issueReports[_smartContract][_functionSelector];
     }
 
-    function getFunctionReportsBySelector(address _smartContract, bytes4 _functionSelector) external view returns (FunctionReport[] memory) {
-        return functionReports[_smartContract][_functionSelector];
+    function getFunctionReportsBySelector(address _smartContract, bytes4 _functionSelector) external view returns (IssueReport[] memory) {
+        return issueReports[_smartContract][_functionSelector];
     }
 
     function getFunctionName(address _smartContract, bytes4 _functionSelector) external view returns (string memory) {
