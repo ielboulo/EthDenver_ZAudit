@@ -106,7 +106,7 @@ zircuit: {
         },
       },
       {
-        version: '0.8.1',
+        version: '0.8.20',
         settings: {
           optimizer: {
             enabled: true,
