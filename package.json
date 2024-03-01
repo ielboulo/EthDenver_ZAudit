@@ -10,6 +10,12 @@
   "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
-    "hardhat": "^2.20.1"
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.24",
+    "chai": "^4.4.1",
+    "ethereum-waffle": "^4.0.10",
+    "hardhat": "^2.20.1",
+    "hardhat-waffle": "^0.0.1-security",
+    "ts-node": "^10.9.2"
   }
 }
