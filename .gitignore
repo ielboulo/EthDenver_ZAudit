@@ -1,4 +1,4 @@
-/smart-contracts/node_modules
+*/node_modules
 /smart-contracts/.env
 
 # Hardhat files
