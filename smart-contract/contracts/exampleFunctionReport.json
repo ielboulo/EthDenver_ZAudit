@@ -1,0 +1,63 @@
+{
+  "smartContracts": {
+    "0x1234567890ABCDEF1234567890ABCDEF12345678": {
+      "functions": {
+        "0xabcdef12": {
+          "functionName": "myFunction1",
+          "issues": [
+            {
+              "tag": "High",
+              "auditorName": "Auditor1",
+              "storageURI": "ipfs://abc123",
+              "proofOfVulnerability": "VulnProof1",
+              "gitHubCommitHash": "abc123def456",
+              "summary": "Issue Summary 1",
+              "submittedBy": "0x7890123456789012345678901234567890123456"
+            },
+            {
+              "tag": "Medium",
+              "auditorName": "Auditor2",
+              "storageURI": "ipfs://def456",
+              "proofOfVulnerability": "VulnProof2",
+              "gitHubCommitHash": "def456ghi789",
+              "summary": "Issue Summary 2",
+              "submittedBy": "0x7890123456789012345678901234567890123456"
+            }
+          ]
+        },
+        "0x98765432": {
+          "functionName": "myFunction2",
+          "issues": [
+            {
+              "tag": "Low",
+              "auditorName": "Auditor3",
+              "storageURI": "ipfs://ghi789",
+              "proofOfVulnerability": "VulnProof3",
+              "gitHubCommitHash": "ghi789jkl012",
+              "summary": "Issue Summary 3",
+              "submittedBy": "0x0123456789012345678901234567890123456789"
+            }
+          ]
+        }
+      }
+    },
+    "0xFEDCBA0987654321FEDCBA0987654321FEDCBA09": {
+      "functions": {
+        "0x12345678": {
+          "functionName": "anotherFunction1",
+          "issues": [
+            {
+              "tag": "Informational",
+              "auditorName": "Auditor4",
+              "storageURI": "ipfs://jkl012",
+              "proofOfVulnerability": "VulnProof4",
+              "gitHubCommitHash": "jkl012mno345",
+              "summary": "Issue Summary 4",
+              "submittedBy": "0x0123456789012345678901234567890123456789"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

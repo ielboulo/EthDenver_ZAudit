@@ -9,16 +9,27 @@ contract ReportContract {
     address public owner;
     address public whitelistContractAddress;
 
-    enum Tag { High, Low }
-
-    struct FunctionReport {
-        string functionName;
-        Tag tag;
+    enum Severity { High, Medium, Low, Informational, BestPractice, Undetermined}
+/*
+functionSelector : is a bytes4 elements obtained by applying a Keccak-256 on the function signature 
+storageURI : the metadata of the details of a function 
+*/
+    struct IssueReport {
+        Severity tag; // on-chain 
+        string auditorName;
+        string storageURI;  
+        string proofOfVulnerability; // On-chain
+        string gitHubCommitHash;// 
+        string summary; 
+        address submittedBy; //  on-chain 
     }
 
-    mapping(address => FunctionReport[]) public functionReports;
+    // bytes32 ByteCodeHash : it's gonna be the netry point  
+    mapping(address => mapping(bytes4 => IssueReport[]) ) public issueReports; // address : smart contract + string : functionName // FunctionReport[]
 
-    event FunctionReportAdded(address indexed smartContract, string functionName, Tag tag);
+    mapping(address => mapping(bytes4 => string)) public functionNames; // mapping from function selector to function name
+
+    event FunctionReportAdded(address indexed smartContract, bytes4 functionSelector, Severity tag);
 
     modifier onlyWhitelisted() {
         require(IWhitelist(whitelistContractAddress).isWhitelisted(msg.sender), "Not whitelisted");
@@ -34,13 +45,42 @@ contract ReportContract {
         owner = msg.sender;
     }
 
+    function addFunctionReport(
+            address _smartContract,
+            bytes4 _functionSelector,
+            string memory _functionName, // Eman : is it needed ? 
+            Severity _tag,
+            string memory _auditorName,
+            string memory _storageURI,
+            string memory _proofOfVulnerability,
+            string memory _gitHubCommitHash,
+            string memory _summary
+        ) external onlyWhitelisted {
+            FunctionReport memory newReport = FunctionReport({
+                tag: _tag,
+                auditorName: _auditorName,
+                storageURI: _storageURI,
+                proofOfVulnerability: _proofOfVulnerability,
+                gitHubCommitHash: _gitHubCommitHash,
+                summary: _summary,
+                submittedBy: msg.sender
+            });
 
-    function addFunctionReport(address _smartContract, string memory _functionName, Tag _tag) external onlyWhitelisted {
-        
+            functionReports[_smartContract][_functionSelector].push(newReport);
+            functionNames[_smartContract][_functionSelector] = _functionName;
+            emit FunctionReportAdded(_smartContract, _functionSelector, _tag);
+        }
+
+    function getFunctionReports(address _smartContract, bytes4 _functionSelector) external view returns (FunctionReport[] memory) {
+        return functionReports[_smartContract][_functionSelector];
     }
 
-    function getFunctionReports(address _smartContract) external view returns (FunctionReport[] memory) {
-        return functionReports[_smartContract];
+    function getFunctionReportsBySelector(address _smartContract, bytes4 _functionSelector) external view returns (FunctionReport[] memory) {
+        return functionReports[_smartContract][_functionSelector];
+    }
+
+    function getFunctionName(address _smartContract, bytes4 _functionSelector) external view returns (string memory) {
+        return functionNames[_smartContract][_functionSelector];
     }
 }
 
