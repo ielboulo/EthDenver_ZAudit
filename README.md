@@ -9,16 +9,14 @@ Our solution centralizes the audit reports and make them easy understandable.
 - Once Company B finishes, a final report is generated and published onchain. 
 - Our application extracts the security review reports and makes them understandable to end-user and easy accessible online (ie: no need to go to projects' website in order to look for the security review report). AI intergration will further improve the users experience. 
 
-### The solution uses Zero Knowledge
+### Zero Knowledge Implemenation
 - We will use RiscZero to generate POVs (Proof of Vulnerability)
 - Security reviewers will be able to submit reviews to a public board while retaining their privacy
 
-### The solution uses AI in order to :
+### AI Solution
 - Extract data from the audit reports (pdf, forms, .. etc)
 - Give statstics about the detected vulnerabilities (from minor to critical ones) ==> the form can be a detailed list + summary + (graphics with repartition of vulnerabilites degree ?) 
 - Access to an AI chatbot in order allow to end user to have access to specific exaplanations if needed (for example : what's a re-entrancy attack ? )
-
-**Question**: what happen if a vulnerability is solved by the project ? does the audit report evolve in time ? ...
 
 ## RoadMap :
 - Create a  platform centralizing the audits (dashboard, .. etc)
@@ -31,13 +29,6 @@ Our solution centralizes the audit reports and make them easy understandable.
 - The gathered data by time ( smart contracts code in solidity / Rust / Cairo + corresponding Vulnerabilities) will serve as a training data for a Machine Learning Model that will allow to detect automatically a vulnerability
 
 ## Technical Stack 
-
-## Access SEISA here 
-Vercel link to the UI ? 
-
-## Annex / Ideas / Pele-mele :
-
-https://skynet.certik.com/projects/aave ===> the link is specific to CErtik audits, but our solution is more global , more inclusive and centralizing all types of audits. 
-We should mention that one project can be audited by many auditors : Certick, hacken, nethermind, solo experts, .. etc 
-
-so it's at this stage that resides also our innovation !
+- Risc-Zero
+- ADX
+- Polyg
