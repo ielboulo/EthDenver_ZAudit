@@ -31,26 +31,19 @@ def configure_routes(app):
         
         if not blockchain_audit_assistant.assistant_id:
             blockchain_audit_assistant.create_assistant()
-            blockchain_audit_assistant.start_conversation()
+        
+        blockchain_audit_assistant.start_conversation()
         
         blockchain_audit_assistant.send_message(question)
         blockchain_audit_assistant.run_assistant()
         responses = blockchain_audit_assistant.get_responses()
         
         if responses:
-            # Assuming responses[-1] is directly the content or you adjust it in get_responses
-            last_response = responses[-1]
-            # Now, you need to extract the text from last_response correctly
-            
-            # Example, if last_response is a dictionary with a structure like { 'text': 'response text here' }
-            # answer_text = last_response['text']
-            
-            # If last_response is already the text
-            answer_text = last_response  # If last_response itself contains the text
-            
-            return jsonify({'answer': answer_text})
+            print (responses)
+            return jsonify(responses)
         else:
             return jsonify({'error': 'Failed to get an answer from the assistant'}), 500
+
 
 
 
