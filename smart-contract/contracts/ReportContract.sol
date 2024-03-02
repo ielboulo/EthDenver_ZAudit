@@ -37,8 +37,17 @@ contract ReportContract  is AccessControl{
 
 // only auditors can submit issues 
 function submitIssue(bytes4[] memory _functionSelectors, string [] memory _issueURIs, Severity [] memory _tag) public {
-    require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
-    require(_functionSelectors.length == _issueURIs.length && _issueURIs.length == _tag.length, "LenghtDoNotMatch");
+   // shouldn't be able to submit issues if the report is already published
+   
+    if (isFinished) {
+        revert ReportAlreadyPublished();
+    }
+    if (!hasRole(AUDITOR_ROLE, msg.sender)) {
+        revert NotAllowedAuditor();
+    }
+    if (_functionSelectors.length != _issueURIs.length || _functionSelectors.length != _tag.length) {
+        revert LenghtDoNotMatch();
+    }
     for (uint i = 0; i < _functionSelectors.length; i++) {
         issueReports[_functionSelectors[i]].push(IssueReport(_issueURIs[i], _tag[i], msg.sender));
         emit FunctionReportAdded(address(this), _functionSelectors[i], _tag[i]);
@@ -54,13 +63,19 @@ function submitIssue(bytes4[] memory _functionSelectors, string [] memory _issue
   }
     
 function publishReport( string memory _reportURI) public {
-    require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
+    if (!hasRole(AUDITOR_ROLE, msg.sender)) {
+        revert NotAllowedAuditor();
+    }
     // check if the url is not empty
-    require(bytes(_reportURI).length > 0, "Report URI is empty");
+    if (bytes(_reportURI).length == 0) {
+        revert ReportURIEmpty();
+    }    
     reportURI = _reportURI;
     isFinished = true;
 }
 
 error LenghtDoNotMatch();
 error NotAllowedAuditor();
-}
+error ReportAlreadyPublished();
+error ReportURIEmpty();
+ }

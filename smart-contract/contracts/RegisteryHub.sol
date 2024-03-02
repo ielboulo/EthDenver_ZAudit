@@ -32,7 +32,9 @@ bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
 /// @param _comitHash : the commit hash of the audited code
      function addAudit( bytes32[] calldata bytecodeHash , string memory _projectName, string memory _comitHash) public {
          // only auditors can add audits
-        require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
+            if (!hasRole(AUDITOR_ROLE, msg.sender)) {
+                revert UnauthorizedAccess();
+            }
         address auditAddress=address (new ReportContract(msg.sender, _projectName, _comitHash));
         // address auditAddress= address(new ReportContract());
         for (uint i = 0; i < bytecodeHash.length; i++) {
@@ -41,7 +43,7 @@ bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
 
     }
 
-function addAuitor(address _auditor, string memory _name, string memory _uri) public {
+function addAuditor(address _auditor, string memory _name, string memory _uri) public {
     require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender), "Caller is not an admin");
    
     //auditors[_auditor] = Auditor(_name, _uri, msg.sender);
@@ -56,4 +58,5 @@ function addAuitor(address _auditor, string memory _name, string memory _uri) pu
  function grantRole(bytes32 role, address account) public override {
  revert();
 }
+error UnauthorizedAccess();
 }
