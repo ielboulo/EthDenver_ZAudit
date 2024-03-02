@@ -23,12 +23,13 @@ bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
 /// @notice : this function is used to add a new audit to the registry
 /// @param uri : the uri of the audit report
 /// @param bytecodeHash : list of  hashs of the bytecodes of the audited contract
-/// @param projectName : the name of the project
-     function addAudit(string memory uri, bytes32[] calldata bytecodeHash, string memory projectName) public {
+/// @param _projectName : the name of the project
+/// @param _comitHash : the commit hash of the audited code
+     function addAudit(string memory uri, bytes32[] calldata bytecodeHash , string memory _projectName, string memory _comitHash) public {
          // only auditors can add audits
         require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
-        // address auditAddress= new ReportContract(uri,  projectName, msg.sender);
-        address auditAddress= address(new ReportContract());
+        address auditAddress=address (new ReportContract(msg.sender, uri, _projectName, _comitHash));
+        // address auditAddress= address(new ReportContract());
         for (uint i = 0; i < bytecodeHash.length; i++) {
             audits[bytecodeHash[i]].push(auditAddress);
         }

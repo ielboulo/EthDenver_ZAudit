@@ -1,86 +1,58 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-interface IWhitelist {
-    function isWhitelisted(address _account) external view returns (bool);
-}
+ import "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract ReportContract {
-    address public owner;
-    address public whitelistContractAddress;
+
+contract ReportContract  is AccessControl{
+    // company auditors 
+    bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
+    string public reportURI;
+    string public projectName;
+    string public comitHash;
+    bool public isFinished;
 
     enum Severity { High, Medium, Low, Informational, BestPractice, Undetermined}
-/*
-functionSelector : is a bytes4 elements obtained by applying a Keccak-256 on the function signature 
-storageURI : the metadata of the details of a function 
-*/
+
     struct IssueReport {
-        Severity tag; // on-chain 
-        string auditorName;
-        string storageURI;  
-        string proofOfVulnerability; // On-chain
-        string gitHubCommitHash;// 
-        string summary; 
-        address submittedBy; //  on-chain 
+        string issueURI;
+        Severity tag; 
+       //string proofOfVulnerability;
+        address submittedBy; 
     }
 
-    // bytes32 ByteCodeHash : it's gonna be the netry point  
-    mapping(address => mapping(bytes4 => IssueReport[]) ) public issueReports; // address : smart contract + string : functionName // FunctionReport[]
-
-    mapping(address => mapping(bytes4 => string)) public functionNames; // mapping from function selector to function name
+    mapping(bytes4 => IssueReport[])  public issueReports; // address : smart contract + string : functionName // FunctionReport[]
 
     event FunctionReportAdded(address indexed smartContract, bytes4 functionSelector, Severity tag);
 
-    modifier onlyWhitelisted() {
-        require(IWhitelist(whitelistContractAddress).isWhitelisted(msg.sender), "Not whitelisted");
-        _;
+ 
+
+ 
+
+    constructor( address _owner, string memory _projectName, string memory _comitHash)  {
+        _grantRole(AUDITOR_ROLE, _owner);
+        reportURI = _reportURI;
+        projectName = _projectName;
+        comitHash = _comitHash;
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not the contract owner");
-        _;
+// only auditors can submit issues 
+function submitIssue(bytes4[] memory _functionSelectors, string [] memory _issueURIs, Severity [] memory _tag) public {
+    require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
+    require(_functionSelectors.length == _issueURIs.length && _issueURIs.length == _tag.length, "LenghtDoNotMatch");
+    for (uint i = 0; i < _functionSelectors.length; i++) {
+        issueReports[_functionSelectors[i]].push(IssueReport(_issueURIs[i], _tag[i], msg.sender));
+        emit FunctionReportAdded(address(this), _functionSelectors[i], _tag[i]);
     }
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    function addFunctionReport(
-            address _smartContract,
-            bytes4 _functionSelector,
-            string memory _functionName, // Eman : is it needed ? 
-            Severity _tag,
-            string memory _auditorName,
-            string memory _storageURI,
-            string memory _proofOfVulnerability,
-            string memory _gitHubCommitHash,
-            string memory _summary
-        ) external onlyWhitelisted {
-            IssueReport memory newReport = IssueReport({
-                tag: _tag,
-                auditorName: _auditorName,
-                storageURI: _storageURI,
-                proofOfVulnerability: _proofOfVulnerability,
-                gitHubCommitHash: _gitHubCommitHash,
-                summary: _summary,
-                submittedBy: msg.sender
-            });
-
-            issueReports[_smartContract][_functionSelector].push(newReport);
-            functionNames[_smartContract][_functionSelector] = _functionName;
-            emit FunctionReportAdded(_smartContract, _functionSelector, _tag);
-        }
-
-    function getFunctionReports(address _smartContract, bytes4 _functionSelector) external view returns (IssueReport[] memory) {
-        return issueReports[_smartContract][_functionSelector];
-    }
-
-    function getFunctionReportsBySelector(address _smartContract, bytes4 _functionSelector) external view returns (IssueReport[] memory) {
-        return issueReports[_smartContract][_functionSelector];
-    }
-
-    function getFunctionName(address _smartContract, bytes4 _functionSelector) external view returns (string memory) {
-        return functionNames[_smartContract][_functionSelector];
-    }
+    
+}
+    
+function publishReport( string memory _reportURI) public {
+    require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
+    reportURI = _reportURI;
+    isFinished = true;
 }
 
+error LenghtDoNotMatch();
+error NotAllowedAuditor();
+}
