@@ -1,17 +1,17 @@
-# EthDenver_SEISA : ZK & AI at the service of security !
+# EthDenver_ZTrust : ZK & Security
+ZTrust is a platform for provable audit on-chain; allowing end-users to get access to the security health of a web3 project (DeFi protocol, DAO smart contracts, ... etc) via an online dashboard.
+The solution uses ZK technology to allow security reviewing companies to keep their reviewers private and the AI integration allows us for an easier user experience. 
+Our solution centralizes the audit reports and make them easy understandable.
 
-SEISA is a platform for provable audit on-chain; allowing end-users to get access to the security health of a web3 project (DeFi protocol, DAO smart contracts, ... etc) via an online dashboard.
-The solution uses ZK technology and is empowered by AI. 
-Our solution centralizes the audit reports and make them easy readable)
+## How it works
+-  Company A pays Company B to perform a security review over a scope of contracts in an agreed upon timeframe
+- Company B sends in their teams to "hack" the contracts
+- Once Company B finishes, a final report is generated and published onchain. 
+- Our application extracts the security review reports and makes them understandable to end-user and easy accessible online (ie: no need to go to projects' website in order to look for the security review report). AI intergration will further improve the users experience. 
 
-## How it works ? :
-- we upload the audit reports on-chain (for example on IPFS / Pinata / others)
-- we process/ extract data from the audit reports ion order to make them understandable to end-user and easy accessible online (ie. : no need to go to projects' website in order to look for the audit report). The report is easily accessible via our platform; it is enough to have the address of the smart contract of the project to access it's security health.
-- if the user can't understand some vulnerability, it can get help from the AI chatbot integrated with our platform.
-
-### The solution uses Zero Knowledge to :
-- Bring the proof of validity of a vulnerability (ie. : I prefer to let you **Eman** elaborate this for more relevancy)
-- Access the auditor's ratings while preseraving their privacy  (ie. : the users can access the rating given by auidtors without revealing the auditor's identity) 
+### The solution uses Zero Knowledge
+- We will use RiscZero to generate POVs (Proof of Vulnerability)
+- Security reviewers will be able to submit reviews to a public board while retaining their privacy
 
 ### The solution uses AI in order to :
 - Extract data from the audit reports (pdf, forms, .. etc)

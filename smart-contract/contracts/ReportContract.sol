@@ -13,8 +13,6 @@ contract ReportContract is AccessControl ,ISeverity{
     address[] public auditors;
     bytes4[] public functionSelectors;
 
- 
-
     struct IssueReport {
         string issueURI;
         Severity tag;

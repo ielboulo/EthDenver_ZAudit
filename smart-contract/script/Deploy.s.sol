@@ -21,7 +21,7 @@ contract Deployer is Script, ISeverity{
   Severity[] public exampleTags;
   function run() external {
     uint256 senderPrivateKey = vm.envUint("PRIVATE_KEY");
-    address pubkey = address(bytes20(abi.encode(("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"))));
+    //address pubkey = address(bytes20(abi.encode(("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"))));
 
     vm.startBroadcast(senderPrivateKey);
     exampleFunctionSelectors.push( bytes4(0x12345678));
