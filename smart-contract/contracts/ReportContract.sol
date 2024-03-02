@@ -11,7 +11,7 @@ contract ReportContract  is AccessControl{
     string public projectName;
     string public comitHash;
     bool public isFinished;
-
+    address[] public auditors;
     enum Severity { High, Medium, Low, Informational, BestPractice, Undetermined}
 
     struct IssueReport {
@@ -31,8 +31,7 @@ contract ReportContract  is AccessControl{
 
     constructor( address _owner, string memory _projectName, string memory _comitHash)  {
         _grantRole(AUDITOR_ROLE, _owner);
-        reportURI = _reportURI;
-        projectName = _projectName;
+         projectName = _projectName;
         comitHash = _comitHash;
     }
 
@@ -46,9 +45,18 @@ function submitIssue(bytes4[] memory _functionSelectors, string [] memory _issue
     }
     
 }
+  function grantRole(bytes32 role, address account) public override {
+    if (!hasRole(role, account)){
+         auditors.push(account); 
+        super.grantRole(role, account);
+    }
+ 
+  }
     
 function publishReport( string memory _reportURI) public {
     require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
+    // check if the url is not empty
+    require(bytes(_reportURI).length > 0, "Report URI is empty");
     reportURI = _reportURI;
     isFinished = true;
 }

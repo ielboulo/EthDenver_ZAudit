@@ -8,11 +8,17 @@ import "./ReportContract.sol";
 /// @title RegisteryHub : this contract is a registry for all on chain audits 
 /// @notice : this contract act 
 contract RegisteryHub is AccessControl {
- 
+ struct Auditor {
+    string name;
+    string uri; // website?
+    address authorAdminAddress;
+}
 // role for auditors 
 bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
  // mapping of contract bytecode hash to list of audits addresses
     mapping(bytes32 => address[]) public audits;
+    // array of auditors
+    Auditor[] public auditors;
     // event emitted when a new audit is added
     event AuditAdded(string uri, bytes32 bytecodeHash, string projectName, address auditAddress);
 
@@ -21,14 +27,13 @@ bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
      }
 
 /// @notice : this function is used to add a new audit to the registry
-/// @param uri : the uri of the audit report
-/// @param bytecodeHash : list of  hashs of the bytecodes of the audited contract
+ /// @param bytecodeHash : list of  hashs of the bytecodes of the audited contract
 /// @param _projectName : the name of the project
 /// @param _comitHash : the commit hash of the audited code
-     function addAudit(string memory uri, bytes32[] calldata bytecodeHash , string memory _projectName, string memory _comitHash) public {
+     function addAudit( bytes32[] calldata bytecodeHash , string memory _projectName, string memory _comitHash) public {
          // only auditors can add audits
         require(hasRole(AUDITOR_ROLE, msg.sender), "Caller is not an auditor");
-        address auditAddress=address (new ReportContract(msg.sender, uri, _projectName, _comitHash));
+        address auditAddress=address (new ReportContract(msg.sender, _projectName, _comitHash));
         // address auditAddress= address(new ReportContract());
         for (uint i = 0; i < bytecodeHash.length; i++) {
             audits[bytecodeHash[i]].push(auditAddress);
@@ -36,4 +41,19 @@ bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
 
     }
 
+function addAuitor(address _auditor, string memory _name, string memory _uri) public {
+    require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender), "Caller is not an admin");
+   
+    //auditors[_auditor] = Auditor(_name, _uri, msg.sender);
+ if (!hasRole(AUDITOR_ROLE, _auditor)){
+         auditors.push(Auditor(_name, _uri, msg.sender));
+         
+         
+        _grantRole(AUDITOR_ROLE, _auditor);
+    }
+}
+    
+ function grantRole(bytes32 role, address account) public override {
+ revert();
+}
 }
