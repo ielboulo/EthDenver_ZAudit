@@ -2,8 +2,8 @@
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
-
-contract ReportContract is AccessControl {
+import "./ISeverity.sol";
+contract ReportContract is AccessControl ,ISeverity{
     // company auditors
     bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
     string public reportURI;
@@ -12,14 +12,8 @@ contract ReportContract is AccessControl {
     bool public isFinished;
     address[] public auditors;
     bytes4[] public functionSelectors;
-    enum Severity {
-        High,
-        Medium,
-        Low,
-        Informational,
-        BestPractice,
-        Undetermined
-    }
+
+ 
 
     struct IssueReport {
         string issueURI;
@@ -73,7 +67,7 @@ contract ReportContract is AccessControl {
         if (!hasRole(AUDITOR_ROLE, msg.sender)) {
             revert NotAllowedAuditor();
         }
-            if (isFinished) {
+        if (isFinished) {
             revert ReportAlreadyPublished();
         }
         // check if the url is not empty
