@@ -26,10 +26,10 @@ contract RegisteryHub is AccessControl {
     address[] public reports;
 
     // event emitted when a new audit is added
-
     event AuditAdded(address indexed auditAddress, string projectName, string comitHash);
     // event emitted when a new auditor is added
-     event AuditorAdded(address indexed auditorAddress, string name, string uri);
+    event AuditorAdded(address indexed auditorAddress, string name, string uri);
+    
     constructor(address _owner) {
         _grantRole(DEFAULT_ADMIN_ROLE, _owner);
     }

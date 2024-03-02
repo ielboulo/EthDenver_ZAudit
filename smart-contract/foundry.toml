@@ -12,4 +12,7 @@ avalancheFuji = "${AVALANCHE_FUJI_RPC_URL}"
 arbitrumTestnet = "${ARBITRUM_TESTNET_RPC_URL}"
 polygonMumbai = "${POLYGON_MUMBAI_RPC_URL}"
 
+[etherscan]
+ethereumSepolia = { key = "${ETHERSCAN_API_KEY}" }
+
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
