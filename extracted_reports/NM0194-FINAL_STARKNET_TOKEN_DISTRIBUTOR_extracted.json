@@ -1,1 +1,46 @@
+{
+  "total_number_of_vulnerabilities": 6,
+  "vulnerability_types": {
+    "informational": 3,
+    "best_practices": 3
+  },
+  "auditor_score": "High",
+  "name_of_the_auditor": "Nethermind",
+  "commit_hash": {
+    "initial_commit_hash": "5ca2536c6cfccb7527dd633796d46a0d2f74febd",
+    "final_commit_hash": "be3ca1f2b55e1de94399c29da854adb30184bebc"
+  },
+  "vulnerabilities": [
+    {
+      "title": "Hardcoded Token Address",
+      "severity": "Info",
+      "summary": "The $STRK address is hardcoded to its address on the Sepolia testnet, which may differ on the mainnet and would require manual checks and code changes before deployment."
+    },
+    {
+      "title": "Low Trust on Alexandria Merkle Tree Library",
+      "severity": "Info",
+      "summary": "There exists an external dependency from the Alexandria library which has not undergone an audit, raising concerns about the overall integrity and reliability of the system."
+    },
+    {
+      "title": "Possible Hash Collision When Calculating the Hash of Leaves",
+      "severity": "Info",
+      "summary": "The leaf of the Merkle tree is computed in a way that could theoretically allow an attacker to provide a combination leading to a valid claim, which could drain the contract. This was fixed by changing the hashing method."
+    },
+    {
+      "title": "Maintainable Imports Rather Single Line for Every Import",
+      "severity": "Best Practices",
+      "summary": "The current coding style imports external libraries one by one on a single line, which does not align with best coding practices. It's recommended to consolidate these imports to improve readability and maintainability."
+    },
+    {
+      "title": "Unchecked Return Value for Token Transfer",
+      "severity": "Best Practices",
+      "summary": "The return value of the token transfer function is unchecked, which is not a good practice in case the token transfer fails. This issue has been fixed."
+    },
+    {
+      "title": "Use of Poseidon Hashing Instead of Pedersen",
+      "severity": "Best Practices",
+      "summary": "The contract initially used Pedersen hashing, which is resource-intensive. It's recommended to switch to Poseidon hashing for efficiency. This change has been implemented."
+    }
+  ]
+}
 
