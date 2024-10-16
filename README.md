@@ -1,3 +1,9 @@
+
+
+https://github.com/user-attachments/assets/491e95f8-4ae0-4c9b-b875-93da72381a85
+
+
+
 # EthDenver_ZTrust : ZK & Security
 ZTrust is a platform for provable audit on-chain; allowing end-users to get access to the security health of a web3 project (DeFi protocol, DAO smart contracts, ... etc) via an online dashboard.
 The solution uses ZK technology to allow security reviewing companies to keep their reviewers private and the AI integration allows us for an easier user experience. 
